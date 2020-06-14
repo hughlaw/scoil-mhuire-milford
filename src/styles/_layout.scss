@@ -1,0 +1,30 @@
+div.main {
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+div.full-height {
+  min-height: 100vh;
+}
+
+a.link-no-style {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+footer {
+  background-color: $primary;
+  color: white;
+  h4 {
+    color: white;
+  }
+  a,
+  a:hover,
+  a:active {
+    color: white;
+  }
+  address {
+    white-space: pre-line;
+  }
+}

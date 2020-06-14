@@ -1,0 +1,41 @@
+{
+  "root": true,
+  "project": {
+    "name": "scoilmhuiremilford"
+  },
+  "api": {
+    "projectId": "i3ln9d71",
+    "dataset": "production"
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/components",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool",
+    "asset-source-unsplash"
+  ],
+  "env": {
+    "development": {
+      "plugins": ["@sanity/vision"]
+    }
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./schemas/schema"
+    },
+    {
+      "name": "part:@sanity/desk-tool/structure",
+      "path": "./deskStructure.js"
+    },
+    {
+      "implements": "part:@sanity/base/theme/variables/override-style",
+      "path": "variableOverrides.css"
+    },
+    {
+      "implements": "part:@sanity/base/brand-logo",
+      "path": "components/logo.js"
+    }
+  ]
+}

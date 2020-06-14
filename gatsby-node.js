@@ -1,87 +1,141 @@
-const _ = require('lodash')
-const path = require('path')
-const { createFilePath } = require('gatsby-source-filesystem')
-const { fmImagesToRelative } = require('gatsby-remark-relative-images')
-
-exports.createPages = ({ actions, graphql }) => {
-  const { createPage } = actions
-
-  return graphql(`
-    {
-      allMarkdownRemark(limit: 1000) {
+exports.createPages = async function({ graphql, actions }) {
+  const { data } = await graphql(`
+    query {
+      allSanityPage {
         edges {
           node {
             id
-            fields {
-              slug
+            slug {
+              current
             }
-            frontmatter {
-              tags
-              templateKey
+          }
+        }
+      }
+      allSanityClassPage {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+          }
+        }
+      }
+      allSanityNewsArticle(limit: 50, sort: { order: DESC, fields: date }) {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+          }
+        }
+      }
+      allSanityEvent(limit: 50, sort: { order: DESC, fields: startDate }) {
+        edges {
+          node {
+            id
+            slug {
+              current
             }
           }
         }
       }
     }
-  `).then(result => {
-    if (result.errors) {
-      result.errors.forEach(e => console.error(e.toString()))
-      return Promise.reject(result.errors)
-    }
+  `);
 
-    const posts = result.data.allMarkdownRemark.edges
+  // Create single pages
+  data.allSanityPage.edges.forEach(edge => {
+    const slug = edge.node.slug.current;
+    const id = edge.node.id;
+    actions.createPage({
+      path: `/${slug}`,
+      component: require.resolve('./src/templates/page.js'),
+      context: { id },
+    });
+  });
 
-    posts.forEach(edge => {
-      const id = edge.node.id
-      createPage({
-        path: edge.node.fields.slug,
-        tags: edge.node.frontmatter.tags,
-        component: path.resolve(
-          `src/templates/${String(edge.node.frontmatter.templateKey)}.js`
-        ),
-        // additional data can be passed via context
-        context: {
-          id,
-        },
-      })
-    })
+  // Create single pages
+  data.allSanityClassPage.edges.forEach(edge => {
+    const slug = edge.node.slug.current;
+    const id = edge.node.id;
+    actions.createPage({
+      path: `/classes/${slug}`,
+      component: require.resolve('./src/templates/classPage.js'),
+      context: { id },
+    });
+  });
 
-    // Tag pages:
-    let tags = []
-    // Iterate through each post, putting all found tags into `tags`
-    posts.forEach(edge => {
-      if (_.get(edge, `node.frontmatter.tags`)) {
-        tags = tags.concat(edge.node.frontmatter.tags)
-      }
-    })
-    // Eliminate duplicate tags
-    tags = _.uniq(tags)
+  // create paginated pages for news articles
+  const postsPerPage = 6;
+  const numPagesArticles = Math.ceil(
+    data.allSanityNewsArticle.edges.length / postsPerPage
+  );
+  const numPagesEvents = Math.ceil(
+    data.allSanityEvent.edges.length / postsPerPage
+  );
 
-    // Make tag pages
-    tags.forEach(tag => {
-      const tagPath = `/tags/${_.kebabCase(tag)}/`
+  // Create paginated news pages
+  Array.from({ length: numPagesArticles }).forEach((_, idx) => {
+    actions.createPage({
+      path: idx === 0 ? `/news` : `/news/${idx + 1}`,
+      component: require.resolve('./src/templates/allNewsPosts.js'),
+      context: {
+        limit: postsPerPage,
+        skip: idx * postsPerPage,
+        numPagesArticles,
+        currentPage: idx + 1,
+      },
+    });
+  });
 
-      createPage({
-        path: tagPath,
-        component: path.resolve(`src/templates/tags.js`),
-        context: {
-          tag,
-        },
-      })
-    })
-  })
-}
+  // Create single article page
+  data.allSanityNewsArticle.edges.forEach(edge => {
+    const slug = edge.node.slug.current;
+    const id = edge.node.id;
+    actions.createPage({
+      path: `/news/${slug}`,
+      component: require.resolve('./src/templates/singleNewsPost.js'),
+      context: { id },
+    });
+  });
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
-  fmImagesToRelative(node) // convert image paths for gatsby images
+  // Create paginated event pages
+  Array.from({ length: numPagesEvents }).forEach((_, idx) => {
+    actions.createPage({
+      path: idx === 0 ? `/events` : `/events/${idx + 1}`,
+      component: require.resolve('./src/templates/allEventPosts.js'),
+      context: {
+        limit: postsPerPage,
+        skip: idx * postsPerPage,
+        numPagesEvents,
+        currentPage: idx + 1,
+      },
+    });
+  });
 
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
-    })
+  // create an events page for when there are no events
+  if (numPagesEvents === 0) {
+    actions.createPage({
+      path: `/events`,
+      component: require.resolve('./src/templates/allEventPosts.js'),
+      context: {
+        limit: postsPerPage,
+        skip: 0,
+        numPagesEvents,
+        currentPage: 1,
+      },
+    });
   }
-}
+
+  // Create single event page
+  data.allSanityEvent.edges.forEach(edge => {
+    const slug = edge.node.slug.current;
+    const id = edge.node.id;
+    actions.createPage({
+      path: `/events/${slug}`,
+      component: require.resolve('./src/templates/singleEventPost.js'),
+      context: { id },
+    });
+  });
+};

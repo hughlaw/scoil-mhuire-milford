@@ -1,0 +1,16 @@
+.card {
+  min-height: 350px;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.1s ease-out;
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+.card a {
+  text-decoration: none;
+  p {
+    color: $body-color;
+  }
+}

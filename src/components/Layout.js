@@ -1,58 +1,87 @@
-import React from 'react'
-import { Helmet } from 'react-helmet'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
-import './all.sass'
-import useSiteMetadata from './SiteMetadata'
-import { withPrefix } from 'gatsby'
+/**
+ * Layout component that queries for data
+ * with Gatsby's StaticQuery component
+ *
+ * See: https://www.gatsbyjs.org/docs/static-query/
+ */
 
-const TemplateWrapper = ({ children }) => {
-  const { title, description } = useSiteMetadata()
-  return (
-    <div>
-      <Helmet>
-        <html lang="en" />
-        <title>{title}</title>
-        <meta name="description" content={description} />
+import React from 'react';
+import { StaticQuery, graphql } from 'gatsby';
 
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href={`${withPrefix('/')}img/apple-touch-icon.png`}
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          href={`${withPrefix('/')}img/favicon-32x32.png`}
-          sizes="32x32"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          href={`${withPrefix('/')}img/favicon-16x16.png`}
-          sizes="16x16"
-        />
+import { Container, Row, Col } from 'react-bootstrap';
 
-        <link
-          rel="mask-icon"
-          href={`${withPrefix('/')}img/safari-pinned-tab.svg`}
-          color="#ff4400"
-        />
-        <meta name="theme-color" content="#fff" />
+import Navbar from './navBar';
+import { FiChevronsDown } from 'react-icons/fi';
+import Crest from '../images/crest.svg';
+import styled, { keyframes } from 'styled-components';
+import Footer from './Footer';
 
-        <meta property="og:type" content="business.business" />
-        <meta property="og:title" content={title} />
-        <meta property="og:url" content="/" />
-        <meta
-          property="og:image"
-          content={`${withPrefix('/')}img/og-image.jpg`}
-        />
-      </Helmet>
-      <Navbar />
-      <div>{children}</div>
-      <Footer />
-    </div>
-  )
-}
+const Splash = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background: url(${props => props.image});
+  background-color: #444;
+  background-blend-mode: multiply;
+  background-size: cover;
+`;
 
-export default TemplateWrapper
+const StyledCrest = styled.img`
+  width: 50vw;
+  max-width: 600px;
+`;
+
+const bounce = keyframes`
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(10px);
+  }
+`;
+
+const StyledIcon = styled(FiChevronsDown)`
+  color: white;
+  font-size: 5rem;
+  animation: 1s ease-in-out infinite alternate ${bounce};
+`;
+
+const Layout = ({ children, pageInfo, headerImage }) => (
+  <StaticQuery
+    query={graphql`
+      query SiteTitleQuery {
+        site {
+          siteMetadata {
+            title
+          }
+        }
+      }
+    `}
+    render={data => (
+      <>
+        <Container fluid className="px-0 main">
+          <Navbar pageInfo={pageInfo} />
+          {headerImage && (
+            <Splash id="splash" image={headerImage.src}>
+              <StyledCrest src={Crest} />
+              <StyledIcon onClick={() => window.scrollTo(0, 500)} />
+            </Splash>
+          )}
+          <Container>
+            <Row id="main-content" noGutters>
+              <Col>
+                <main className="mt-5">{children}</main>
+              </Col>
+            </Row>
+          </Container>
+        </Container>
+        <Footer />
+      </>
+    )}
+  />
+);
+
+export default Layout;

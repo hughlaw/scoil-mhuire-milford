@@ -1,115 +1,111 @@
-import React from 'react'
-import { Link } from 'gatsby'
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { FiMapPin, FiPhone, FiMail } from 'react-icons/fi';
+import { graphql, useStaticQuery } from 'gatsby';
+import { Link } from 'gatsby';
 
-import logo from '../img/logo.svg'
-import facebook from '../img/social/facebook.svg'
-import instagram from '../img/social/instagram.svg'
-import twitter from '../img/social/twitter.svg'
-import vimeo from '../img/social/vimeo.svg'
+const Footer = () => {
+  const { sanitySiteSettings: settings } = useStaticQuery(graphql`
+    {
+      sanitySiteSettings {
+        address
+        tel1
+        tel1raw
+        tel2
+        tel2raw
+        contactEmail
+        footerLinks {
+          ... on SanityPoliciesPage {
+            title
+            slug {
+              current
+            }
+          }
+          ... on SanityPage {
+            title
+            slug {
+              current
+            }
+          }
+          ... on SanityAboutPage {
+            title
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  `);
 
-const Footer = class extends React.Component {
-  render() {
-    return (
-      <footer className="footer has-background-black has-text-white-ter">
-        <div className="content has-text-centered">
-          <img
-            src={logo}
-            alt="Kaldi"
-            style={{ width: '14em', height: '10em' }}
-          />
-        </div>
-        <div className="content has-text-centered has-background-black has-text-white-ter">
-          <div className="container has-background-black has-text-white-ter">
-            <div className="columns">
-              <div className="column is-4">
-                <section className="menu">
-                  <ul className="menu-list">
-                    <li>
-                      <Link to="/" className="navbar-item">
-                        Home
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="navbar-item" to="/about">
-                        About
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="navbar-item" to="/products">
-                        Products
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="navbar-item" to="/contact/examples">
-                        Form Examples
-                      </Link>
-                    </li>
-                    <li>
-                      <a
-                        className="navbar-item"
-                        href="/admin/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Admin
-                      </a>
-                    </li>
-                  </ul>
-                </section>
-              </div>
-              <div className="column is-4">
-                <section>
-                  <ul className="menu-list">
-                    <li>
-                      <Link className="navbar-item" to="/blog">
-                        Latest Stories
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="navbar-item" to="/contact">
-                        Contact
-                      </Link>
-                    </li>
-                  </ul>
-                </section>
-              </div>
-              <div className="column is-4 social">
-                <a title="facebook" href="https://facebook.com">
-                  <img
-                    src={facebook}
-                    alt="Facebook"
-                    style={{ width: '1em', height: '1em' }}
-                  />
-                </a>
-                <a title="twitter" href="https://twitter.com">
-                  <img
-                    className="fas fa-lg"
-                    src={twitter}
-                    alt="Twitter"
-                    style={{ width: '1em', height: '1em' }}
-                  />
-                </a>
-                <a title="instagram" href="https://instagram.com">
-                  <img
-                    src={instagram}
-                    alt="Instagram"
-                    style={{ width: '1em', height: '1em' }}
-                  />
-                </a>
-                <a title="vimeo" href="https://vimeo.com">
-                  <img
-                    src={vimeo}
-                    alt="Vimeo"
-                    style={{ width: '1em', height: '1em' }}
-                  />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    )
-  }
-}
+  return (
+    <Container fluid className="px-0">
+      <Row as="footer" noGutters>
+        <Container>
+          <Row className="py-4">
+            <Col xs={12} sm={6}>
+              <h4 className="mb-3">Contact details</h4>
+              <dl>
+                <div className="d-flex">
+                  <dt className="pr-2">
+                    <FiMapPin />
+                  </dt>
+                  <dd>
+                    <address>{settings.address}</address>
+                  </dd>
+                </div>
+                <div className="d-flex">
+                  <dt className="pr-2">
+                    <FiPhone />
+                  </dt>
+                  <dd>
+                    <a href={`tel://${settings.tel1raw}`}>{settings.tel1}</a>
+                    <br />
+                    <a href={`tel://${settings.tel2raw}`}>{settings.tel2}</a>
+                  </dd>
+                </div>
+                <div className="d-flex">
+                  <dt className="pr-2">
+                    <FiMail />
+                  </dt>
+                  <dd>
+                    <a href={`mailto:${settings.contactEmail}`}>
+                      {settings.contactEmail}
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </Col>
+            <Col xs={12} sm={6} className="text-sm-right">
+              <h4 className="mb-3">Useful links</h4>
+              {settings.footerLinks.map(page => (
+                <Link
+                  key={page.slug.current}
+                  to={`/${page.slug.current}`}
+                  activeClassName="active"
+                  className="d-block pb-1"
+                >
+                  {page.title}
+                </Link>
+              ))}
+              <a
+                href="https://www.aladdin.ie/signin"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Aladdin Login
+              </a>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="text-center py-2">
+              © {new Date().getFullYear()} Scoil Mhuire Milford
+            </Col>
+          </Row>
+        </Container>
+      </Row>
+    </Container>
+  );
+};
 
-export default Footer
+export default Footer;

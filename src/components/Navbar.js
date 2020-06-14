@@ -1,98 +1,97 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import github from '../img/github-icon.svg'
-import logo from '../img/logo.svg'
+import React from 'react';
+import { Link, graphql, useStaticQuery } from 'gatsby';
+import styled from 'styled-components';
+import crest from '../images/crest-small.svg';
 
-const Navbar = class extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      active: false,
-      navBarActiveClass: '',
-    }
+import { Navbar, Nav, Container } from 'react-bootstrap';
+
+const SiteTitle = styled(Link)`
+  color: white;
+  font-size: 1rem;
+  padding: 0;
+  &:hover {
+    color: white;
   }
+`;
 
-  toggleHamburger = () => {
-    // toggle the active boolean in the state
-    this.setState(
-      {
-        active: !this.state.active,
-      },
-      // after state has been updated,
-      () => {
-        // set the class in state for the navbar accordingly
-        this.state.active
-          ? this.setState({
-              navBarActiveClass: 'is-active',
-            })
-          : this.setState({
-              navBarActiveClass: '',
-            })
+const CustomNavbar = ({ pageInfo }) => {
+  const { sanitySiteSettings: settings } = useStaticQuery(graphql`
+    {
+      sanitySiteSettings {
+        navigation {
+          ... on SanityPoliciesPage {
+            title
+            slug {
+              current
+            }
+          }
+          ... on SanityPage {
+            title
+            slug {
+              current
+            }
+          }
+          ... on SanityAboutPage {
+            title
+            slug {
+              current
+            }
+          }
+        }
       }
-    )
-  }
+    }
+  `);
 
-  render() {
-    return (
-      <nav
-        className="navbar is-transparent"
-        role="navigation"
-        aria-label="main-navigation"
-      >
-        <div className="container">
-          <div className="navbar-brand">
-            <Link to="/" className="navbar-item" title="Logo">
-              <img src={logo} alt="Kaldi" style={{ width: '88px' }} />
-            </Link>
-            {/* Hamburger menu */}
-            <div
-              className={`navbar-burger burger ${this.state.navBarActiveClass}`}
-              data-target="navMenu"
-              onClick={() => this.toggleHamburger()}
+  return (
+    <Navbar variant="dark" expand="lg" id="site-navbar">
+      <Container>
+        <Link to="/" className="link-no-style">
+          <Navbar.Brand as="span">
+            <img src={crest} alt="" width="58" height="66" />
+          </Navbar.Brand>
+        </Link>
+        <SiteTitle to="/">Scoil Mhuire Milford</SiteTitle>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ml-auto" activeKey={pageInfo && pageInfo.pageName}>
+            <Link
+              to="/news"
+              activeClassName="active"
+              className="link-no-style pl-lg-4 pb-3 pb-lg-0"
             >
-              <span />
-              <span />
-              <span />
-            </div>
-          </div>
-          <div
-            id="navMenu"
-            className={`navbar-menu ${this.state.navBarActiveClass}`}
-          >
-            <div className="navbar-start has-text-centered">
-              <Link className="navbar-item" to="/about">
-                About
-              </Link>
-              <Link className="navbar-item" to="/products">
-                Products
-              </Link>
-              <Link className="navbar-item" to="/blog">
-                Blog
-              </Link>
-              <Link className="navbar-item" to="/contact">
-                Contact
-              </Link>
-              <Link className="navbar-item" to="/contact/examples">
-                Form Examples
-              </Link>
-            </div>
-            <div className="navbar-end has-text-centered">
-              <a
-                className="navbar-item"
-                href="https://github.com/netlify-templates/gatsby-starter-netlify-cms"
-                target="_blank"
-                rel="noopener noreferrer"
+              News
+            </Link>
+            <Link
+              to="/events"
+              activeClassName="active"
+              partiallyActive={true}
+              className="link-no-style pl-lg-4 pb-3 pb-lg-0"
+            >
+              Events
+            </Link>
+            <Link
+              to="/classes"
+              activeClassName="active"
+              partiallyActive={true}
+              className="link-no-style pl-lg-4 pb-3 pb-lg-0"
+            >
+              Classes
+            </Link>
+            {settings.navigation.map(page => (
+              <Link
+                key={page.slug.current}
+                to={`/${page.slug.current}`}
+                activeClassName="active"
+                className="link-no-style pl-lg-4 pb-3 pb-lg-0"
               >
-                <span className="icon">
-                  <img src={github} alt="Github" />
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
-    )
-  }
-}
+                {page.title}
+              </Link>
+            ))}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+};
 
-export default Navbar
+export default CustomNavbar;
