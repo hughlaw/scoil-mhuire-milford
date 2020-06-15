@@ -9,12 +9,11 @@ import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 
 import { Container, Row, Col } from 'react-bootstrap';
-
-import NavBar from './NavBar';
 import { FiChevronsDown } from 'react-icons/fi';
 import Crest from '../images/crest.svg';
 import styled, { keyframes } from 'styled-components';
 import Footer from './Footer';
+import CustomNavbar from './NavBar';
 
 const Splash = styled.div`
   width: 100%;
@@ -63,7 +62,7 @@ const Layout = ({ children, pageInfo, headerImage }) => (
     render={data => (
       <>
         <Container fluid className="px-0 main">
-          <NavBar pageInfo={pageInfo} />
+          <CustomNavbar pageInfo={pageInfo} />
           {headerImage && (
             <Splash id="splash" image={headerImage.src}>
               <StyledCrest src={Crest} />
