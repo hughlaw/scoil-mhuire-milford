@@ -13,7 +13,7 @@ import { FiChevronsDown } from 'react-icons/fi';
 import Crest from '../images/crest.svg';
 import styled, { keyframes } from 'styled-components';
 import Footer from './Footer';
-import CustomNavbar from './NavBar';
+import CustomNavbar from './CustomNavbar';
 
 const Splash = styled.div`
   width: 100%;
