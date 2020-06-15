@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import SEO from '../components/seo';
 import { Row, Col } from 'react-bootstrap';
 import EventPreview from '../components/EventPreview';

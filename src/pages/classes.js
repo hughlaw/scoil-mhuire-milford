@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Container, Card } from 'react-bootstrap';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import SEO from '../components/seo';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Link } from 'gatsby';

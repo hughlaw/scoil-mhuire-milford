@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Container, Alert } from 'react-bootstrap';
 import { FiChevronRight } from 'react-icons/fi';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import SEO from '../components/seo';
 import NewsArticlePreview from '../components/NewsArticlePreview';
 import EventPreview from '../components/EventPreview';
