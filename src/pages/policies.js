@@ -6,7 +6,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import BlockContent from '@sanity/block-content-to-react';
 import { FiDownload } from 'react-icons/fi';
 
-const IndexPage = () => {
+const PoliciesPage = () => {
   const { sanityPoliciesPage: policyPage } = useStaticQuery(graphql`
     {
       sanityPoliciesPage {
@@ -66,4 +66,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default PoliciesPage;
