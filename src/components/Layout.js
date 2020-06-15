@@ -10,7 +10,7 @@ import { StaticQuery, graphql } from 'gatsby';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
-import Navbar from './NavBar';
+import NavBar from './NavBar';
 import { FiChevronsDown } from 'react-icons/fi';
 import Crest from '../images/crest.svg';
 import styled, { keyframes } from 'styled-components';
@@ -63,7 +63,7 @@ const Layout = ({ children, pageInfo, headerImage }) => (
     render={data => (
       <>
         <Container fluid className="px-0 main">
-          <Navbar pageInfo={pageInfo} />
+          <NavBar pageInfo={pageInfo} />
           {headerImage && (
             <Splash id="splash" image={headerImage.src}>
               <StyledCrest src={Crest} />
