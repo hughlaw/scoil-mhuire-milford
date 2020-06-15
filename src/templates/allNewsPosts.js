@@ -15,10 +15,6 @@ export default function allPosts({ pageContext, data }) {
   const nextPage = `/news/${currentPage + 1}`;
   const posts = data.allSanityNewsArticle.edges;
 
-  console.log('isLast', isLast);
-  console.log('currentPage', currentPage);
-  console.log('numPagesArticles', numPagesArticles);
-
   return (
     <Layout>
       <SEO
