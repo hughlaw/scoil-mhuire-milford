@@ -10,7 +10,7 @@ import { StaticQuery, graphql } from 'gatsby';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
-import Navbar from './navBar';
+import Navbar from './NavBar';
 import { FiChevronsDown } from 'react-icons/fi';
 import Crest from '../images/crest.svg';
 import styled, { keyframes } from 'styled-components';
