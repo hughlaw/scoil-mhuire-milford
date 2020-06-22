@@ -50,8 +50,10 @@ const StyledIcon = styled(FiChevronsDown)`
 `;
 
 const Layout = ({ children, pageInfo, headerImage }) => {
-  ReactGA.initialize('UA-15213850-6');
-  ReactGA.pageview(window.location.pathname + window.location.search);
+  if (typeof window !== 'undefined') {
+    ReactGA.initialize('UA-15213850-6');
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }
   return (
     <StaticQuery
       query={graphql`
