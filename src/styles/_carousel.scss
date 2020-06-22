@@ -1,0 +1,37 @@
+.embla {
+  overflow: hidden;
+  position: relative;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  position: relative; /* Needed if loop: true */
+  flex: 0 0 100%; /* Choose any slide width */
+}
+
+.embla__control {
+  border-radius: 0;
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  color: white;
+  font-size: 4rem;
+  &.right {
+    right: 0;
+  }
+  svg {
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
+    transform: translate3d(0, 0, 0);
+  }
+  &:focus {
+    box-shadow: none;
+    svg {
+      transform: translate3d(0, -4px, 0);
+      box-shadow: 0 2px 0.8rem rgba(0, 0, 0, 0.2);
+    }
+  }
+}

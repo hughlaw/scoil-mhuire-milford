@@ -5,7 +5,7 @@ import SEO from '../components/seo';
 import { graphql, useStaticQuery } from 'gatsby';
 import BlockContent from '@sanity/block-content-to-react';
 import imageUrlBuilder from '@sanity/image-url';
-import { serializers } from '../../sanity/schemas/blockEditor';
+import { serializers } from '../blockContent';
 
 const builder = imageUrlBuilder({
   projectId: 'i3ln9d71',

@@ -5,7 +5,7 @@ import SEO from '../components/seo';
 import Image from 'gatsby-image';
 import { Button } from 'react-bootstrap';
 import { FiChevronLeft } from 'react-icons/fi';
-import { serializers } from '../../sanity/schemas/blockEditor';
+import { serializers } from '../blockContent';
 import { graphql } from 'gatsby';
 import moment from 'moment';
 

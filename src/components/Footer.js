@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FiMapPin, FiPhone, FiMail } from 'react-icons/fi';
+import { FaFacebook, FaTwitter } from 'react-icons/fa';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Link } from 'gatsby';
 
@@ -14,6 +15,8 @@ const Footer = () => {
         tel2
         tel2raw
         contactEmail
+        twitter
+        facebook
         footerLinks {
           ... on SanityPoliciesPage {
             title
@@ -45,7 +48,7 @@ const Footer = () => {
           <Row className="py-4">
             <Col xs={12} sm={6}>
               <h4 className="mb-3">Contact details</h4>
-              <dl>
+              <dl className="mb-2">
                 <div className="d-flex">
                   <dt className="pr-2">
                     <FiMapPin />
@@ -74,6 +77,44 @@ const Footer = () => {
                     </a>
                   </dd>
                 </div>
+                <div className="mb-4 mb-sm-0">
+                  {settings.facebook && (
+                    <div className="d-flex align-items-center mb-2">
+                      <dt className="pr-2">
+                        <FaFacebook />
+                      </dt>
+                      <dd className="m-0 mt-1">
+                        <a
+                          href={`http://www.facebook.com/${settings.facebook}`}
+                          className="mr-3"
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label=""
+                        >
+                          Scoil Mhuire on Facebook
+                        </a>
+                      </dd>
+                    </div>
+                  )}
+                  {settings.twitter && (
+                    <div className="d-flex align-items-center mb-2">
+                      <dt className="pr-2">
+                        <FaTwitter />
+                      </dt>
+                      <dd className="m-0 mt-1">
+                        <a
+                          href={`http://www.twitter.com/${settings.twitter}`}
+                          className="mr-3"
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label=""
+                        >
+                          Scoil Mhuire on Twitter
+                        </a>
+                      </dd>
+                    </div>
+                  )}
+                </div>
               </dl>
             </Col>
             <Col xs={12} sm={6} className="text-sm-right">
@@ -90,6 +131,7 @@ const Footer = () => {
               ))}
               <a
                 href="https://www.aladdin.ie/signin"
+                className="d-block pb-1"
                 target="_blank"
                 rel="noreferrer"
               >

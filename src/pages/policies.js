@@ -5,6 +5,7 @@ import SEO from '../components/seo';
 import { graphql, useStaticQuery } from 'gatsby';
 import BlockContent from '@sanity/block-content-to-react';
 import { FiDownload } from 'react-icons/fi';
+import { serializers } from '../blockContent';
 
 const PoliciesPage = () => {
   const { sanityPoliciesPage: policyPage } = useStaticQuery(graphql`
@@ -35,7 +36,10 @@ const PoliciesPage = () => {
         <Row>
           <Col>
             <h1>Policies</h1>
-            <BlockContent blocks={policyPage._rawIntroduction} />
+            <BlockContent
+              blocks={policyPage._rawIntroduction}
+              serializers={serializers}
+            />
           </Col>
         </Row>
 

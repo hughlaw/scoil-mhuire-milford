@@ -1,10 +1,10 @@
 import React from 'react';
-import { FiImage, FiYoutube } from 'react-icons/fi';
 import Image from 'gatsby-image';
 import imageUrlBuilder from '@sanity/image-url';
 import getYouTubeId from 'get-youtube-id';
 import YouTube from 'react-youtube';
 import { ResponsiveEmbed } from 'react-bootstrap';
+import Carousel from './components/Carousel';
 
 const builder = imageUrlBuilder({
   projectId: 'i3ln9d71',
@@ -70,36 +70,14 @@ export const serializers = {
         />
       );
     },
+    slideshow: ({ node }) => {
+      console.log(node);
+      return (
+        <>
+          {node.title && <h3>{node.title}</h3>}
+          <Carousel slides={node.images} />
+        </>
+      );
+    },
   },
-};
-
-export const smBlock = {
-  name: 'sm-block',
-  title: 'Block content',
-  type: 'array',
-  of: [
-    {
-      type: 'block',
-      styles: [
-        { title: 'Normal', value: 'normal' },
-        { title: 'Heading 2', value: 'h2' },
-        { title: 'Heading 3', value: 'h3' },
-        { title: 'Heading 4', value: 'h4' },
-      ],
-      marks: {
-        decorators: [
-          { title: 'String', value: 'strong' },
-          { title: 'Emphasis', value: 'em' },
-        ],
-      },
-    },
-    {
-      type: 'smImage',
-      icon: FiImage,
-    },
-    {
-      type: 'youtube',
-      icon: FiYoutube,
-    },
-  ],
 };

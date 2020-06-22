@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
 import BlockContent from '@sanity/block-content-to-react';
 import { Link } from 'gatsby';
-import { serializers } from '../../sanity/schemas/blockEditor';
+import { serializers } from '../blockContent';
 
 const AlertHeading = styled.h2`
   color: white;

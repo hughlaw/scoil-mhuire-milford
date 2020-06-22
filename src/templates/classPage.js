@@ -3,7 +3,7 @@ import BlockContent from '@sanity/block-content-to-react';
 import Layout from '../components/Layout';
 import SEO from '../components/seo';
 import { graphql } from 'gatsby';
-import { serializers } from '../../sanity/schemas/blockEditor';
+import { serializers } from '../blockContent';
 import imageUrlBuilder from '@sanity/image-url';
 import { Button } from 'react-bootstrap';
 import { FiChevronLeft } from 'react-icons/fi';

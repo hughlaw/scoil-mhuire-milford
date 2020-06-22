@@ -7,7 +7,7 @@ import { Button, Row, Col } from 'react-bootstrap';
 import { FiChevronLeft } from 'react-icons/fi';
 import imageUrlBuilder from '@sanity/image-url';
 import { graphql } from 'gatsby';
-import { serializers } from '../../sanity/schemas/blockEditor';
+import { serializers } from '../blockContent';
 import moment from 'moment';
 
 const builder = imageUrlBuilder({

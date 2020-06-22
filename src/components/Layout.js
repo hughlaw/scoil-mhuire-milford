@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import ReactGA from 'react-ga';
 import { StaticQuery, graphql } from 'gatsby';
 
 import { Container, Row, Col } from 'react-bootstrap';
@@ -48,39 +49,43 @@ const StyledIcon = styled(FiChevronsDown)`
   animation: 1s ease-in-out infinite alternate ${bounce};
 `;
 
-const Layout = ({ children, pageInfo, headerImage }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
+const Layout = ({ children, pageInfo, headerImage }) => {
+  ReactGA.initialize('UA-15213850-6');
+  ReactGA.pageview(window.location.pathname + window.location.search);
+  return (
+    <StaticQuery
+      query={graphql`
+        query SiteTitleQuery {
+          site {
+            siteMetadata {
+              title
+            }
           }
         }
-      }
-    `}
-    render={data => (
-      <>
-        <Container fluid className="px-0 main">
-          <CustomNavbar pageInfo={pageInfo} />
-          {headerImage && (
-            <Splash id="splash" image={headerImage.src}>
-              <StyledCrest src={Crest} />
-              <StyledIcon onClick={() => window.scrollTo(0, 500)} />
-            </Splash>
-          )}
-          <Container>
-            <Row id="main-content" noGutters>
-              <Col>
-                <main className="mt-5">{children}</main>
-              </Col>
-            </Row>
+      `}
+      render={data => (
+        <>
+          <Container fluid className="px-0 main">
+            <CustomNavbar pageInfo={pageInfo} />
+            {headerImage && (
+              <Splash id="splash" image={headerImage.src}>
+                <StyledCrest src={Crest} />
+                <StyledIcon onClick={() => window.scrollTo(0, 500)} />
+              </Splash>
+            )}
+            <Container>
+              <Row id="main-content" noGutters>
+                <Col>
+                  <main className="mt-5">{children}</main>
+                </Col>
+              </Row>
+            </Container>
           </Container>
-        </Container>
-        <Footer />
-      </>
-    )}
-  />
-);
+          <Footer />
+        </>
+      )}
+    />
+  );
+};
 
 export default Layout;
