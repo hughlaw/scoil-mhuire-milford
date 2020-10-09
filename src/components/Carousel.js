@@ -67,22 +67,23 @@ const Carousel = ({ slides }) => {
       )}
       <EmblaCarouselReact className="embla rounded">
         <div className="embla__container">
-          {slides.map(slide => {
-            return (
-              <figure
-                className="embla__slide"
-                style={{ flex: '0 0 100%', margin: '0' }}
-              >
-                <Image
-                  key={slide._key}
-                  className=""
-                  alt={slide.alt}
-                  fluid={{
-                    aspectRatio: 1.75,
-                    srcSet: `${urlFor(slide.image.asset)
-                      .width(200)
-                      .fit('crop')
-                      .url()} 200w,
+          {slides &&
+            slides.map(slide => {
+              return (
+                <figure
+                  className="embla__slide"
+                  style={{ flex: '0 0 100%', margin: '0' }}
+                >
+                  <Image
+                    key={slide._key}
+                    className=""
+                    alt={slide.alt}
+                    fluid={{
+                      aspectRatio: 1.75,
+                      srcSet: `${urlFor(slide.image.asset)
+                        .width(200)
+                        .fit('crop')
+                        .url()} 200w,
                       ${urlFor(slide.image.asset)
                         .width(400)
                         .fit('crop')
@@ -104,15 +105,15 @@ const Carousel = ({ slides }) => {
                         .fit('crop')
                         .url()} 2400w,
                       ${urlFor(slide.image.asset).url()} 6000w,`,
-                    sizes: '(max-width: 800px) 100vw, 800px',
-                    src: urlFor(slide.image.asset).url(),
-                  }}
-                />
-                {slide.caption && <Caption>{slide.caption}</Caption>}
-                {!slide.caption && <Caption>{slide.alt}</Caption>}
-              </figure>
-            );
-          })}
+                      sizes: '(max-width: 800px) 100vw, 800px',
+                      src: urlFor(slide.image.asset).url(),
+                    }}
+                  />
+                  {slide.caption && <Caption>{slide.caption}</Caption>}
+                  {!slide.caption && <Caption>{slide.alt}</Caption>}
+                </figure>
+              );
+            })}
         </div>
       </EmblaCarouselReact>
     </div>
