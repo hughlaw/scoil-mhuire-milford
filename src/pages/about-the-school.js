@@ -49,7 +49,7 @@ const AboutTheSchoolPage = () => {
             <p>{aboutPage.staffIntro}</p>
             <Row>
               {staff.staffMembers.map(person => (
-                <Col md={6} key={person.id}>
+                <Col md={6} xl="4" key={person.id}>
                   <Row className="mb-4">
                     <Col xs="auto" className="flex-shrink-1">
                       <img
