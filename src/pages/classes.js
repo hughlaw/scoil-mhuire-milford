@@ -19,7 +19,7 @@ const urlFor = source => {
 const ClassesPage = () => {
   const { allSanityClassPage: classPages } = useStaticQuery(graphql`
     {
-      allSanityClassPage {
+      allSanityClassPage(sort: { order: ASC, fields: sortOrder }) {
         edges {
           node {
             title
