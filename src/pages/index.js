@@ -15,6 +15,12 @@ const AlertHeading = styled.h2`
   color: white;
 `;
 
+const HomepageAlert = styled(Row)`
+  a {
+    color: yellow;
+  }
+`;
+
 const IndexPage = () => {
   const {
     sanityHomepageContent: homepageContent,
@@ -103,7 +109,7 @@ const IndexPage = () => {
           </Col>
         </Row>
         {homepageContent._rawAlert.showAlert && (
-          <Row>
+          <HomepageAlert>
             <Col>
               <Alert variant="danger">
                 <AlertHeading>
@@ -112,7 +118,7 @@ const IndexPage = () => {
                 <BlockContent blocks={homepageContent._rawAlert.alertText} />
               </Alert>
             </Col>
-          </Row>
+          </HomepageAlert>
         )}
 
         <Row className="mt-4 mb-4">

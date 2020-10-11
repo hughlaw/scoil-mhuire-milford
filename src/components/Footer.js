@@ -4,6 +4,7 @@ import { FiMapPin, FiPhone, FiMail } from 'react-icons/fi';
 import { FaFacebook, FaTwitter } from 'react-icons/fa';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Link } from 'gatsby';
+import greenschoolslogo from '../images/greenschools.png';
 
 const Footer = () => {
   const { sanitySiteSettings: settings } = useStaticQuery(graphql`
@@ -136,6 +137,19 @@ const Footer = () => {
                 rel="noreferrer"
               >
                 Aladdin Login
+              </a>
+              <a
+                href="https://greenschoolsireland.org/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src={greenschoolslogo}
+                  className="my-4"
+                  alt=""
+                  width="120"
+                  height="120"
+                />
               </a>
             </Col>
           </Row>
