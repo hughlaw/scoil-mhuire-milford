@@ -71,7 +71,6 @@ export const serializers = {
       );
     },
     slideshow: ({ node }) => {
-      console.log(node);
       return (
         <>
           {node.title && <h3>{node.title}</h3>}

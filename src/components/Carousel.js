@@ -35,8 +35,6 @@ const Carousel = ({ slides }) => {
     const checkArrows = () => {
       const currentSlide = embla.selectedScrollSnap() + 1;
       const numSlides = embla.slideNodes().length;
-      console.log(`currentslide = ${currentSlide}`);
-      console.log(`numSlides = ${numSlides}`);
       setHideLeftArrow(currentSlide === 1);
       setHideRightArrow(currentSlide === numSlides);
     };
@@ -48,7 +46,7 @@ const Carousel = ({ slides }) => {
   }, [embla]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative' }} className="mb-5">
       {!hideLeftArrow && (
         <button
           className="btn btn-link embla__control left"
@@ -71,11 +69,11 @@ const Carousel = ({ slides }) => {
             slides.map(slide => {
               return (
                 <figure
+                  key={slide._key}
                   className="embla__slide"
                   style={{ flex: '0 0 100%', margin: '0' }}
                 >
                   <Image
-                    key={slide._key}
                     className=""
                     alt={slide.alt}
                     fluid={{
@@ -110,7 +108,6 @@ const Carousel = ({ slides }) => {
                     }}
                   />
                   {slide.caption && <Caption>{slide.caption}</Caption>}
-                  {!slide.caption && <Caption>{slide.alt}</Caption>}
                 </figure>
               );
             })}
