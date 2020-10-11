@@ -38,6 +38,7 @@ const IndexPage = () => {
         }
         _rawPrincipalsWelcome
         _rawAlert
+        _rawSchoolMotto
       }
 
       allSanityNewsArticle(limit: 3, sort: { order: DESC, fields: date }) {
@@ -109,7 +110,7 @@ const IndexPage = () => {
           </Col>
         </Row>
         {homepageContent._rawAlert.showAlert && (
-          <HomepageAlert>
+          <HomepageAlert className="my-4">
             <Col>
               <Alert variant="danger">
                 <AlertHeading>
@@ -119,6 +120,17 @@ const IndexPage = () => {
               </Alert>
             </Col>
           </HomepageAlert>
+        )}
+        {homepageContent._rawSchoolMotto && (
+          <Row>
+            <Col>
+              <h2>Our school motto</h2>
+              <BlockContent
+                blocks={homepageContent._rawSchoolMotto}
+                serializers={serializers}
+              />
+            </Col>
+          </Row>
         )}
 
         <Row className="mt-4 mb-4">
