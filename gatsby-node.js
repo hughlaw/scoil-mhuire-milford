@@ -44,6 +44,13 @@ exports.createPages = async function({ graphql, actions }) {
     }
   `);
 
+  // Create redeploy page
+
+  actions.createPage({
+    path: `deploy`,
+    component: require.resolve(`./src/templates/redeploy.js`),
+  });
+
   // Create single pages
   data.allSanityPage.edges.forEach(edge => {
     const slug = edge.node.slug.current;
