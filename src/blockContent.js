@@ -39,33 +39,33 @@ export const serializers = {
           className="my-4 rounded"
           fluid={{
             aspectRatio: 1.75,
-            srcSet: `${urlFor(node.image.asset)
+            srcSet: `${urlFor(node.image)
               .width(200)
               .fit('crop')
               .url()} 200w,
-            ${urlFor(node.image.asset)
+            ${urlFor(node.image)
               .width(400)
               .fit('crop')
               .url()} 400w,
-            ${urlFor(node.image.asset)
+            ${urlFor(node.image)
               .width(800)
               .fit('crop')
               .url()} 800w,
-            ${urlFor(node.image.asset)
+            ${urlFor(node.image)
               .width(1200)
               .fit('crop')
               .url()} 1200w,
-            ${urlFor(node.image.asset)
+            ${urlFor(node.image)
               .width(1600)
               .fit('crop')
               .url()} 1600w,
-            ${urlFor(node.image.asset)
+            ${urlFor(node.image)
               .width(2400)
               .fit('crop')
               .url()} 2400w,
-            ${urlFor(node.image.asset).url()} 6000w,`,
+            ${urlFor(node.image).url()} 6000w,`,
             sizes: '(max-width: 800px) 100vw, 800px',
-            src: urlFor(node.image.asset).url(),
+            src: urlFor(node.image).url(),
           }}
         />
       );

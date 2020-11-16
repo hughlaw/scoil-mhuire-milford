@@ -61,14 +61,14 @@ const CustomNavbar = ({ pageInfo }) => {
             >
               News
             </Link>
-            <Link
+            {/* <Link
               to="/events"
               activeClassName="active"
               partiallyActive={true}
               className="link-no-style pl-lg-4 pb-3 pb-lg-0"
             >
               Events
-            </Link>
+            </Link> */}
             <Link
               to="/classes"
               activeClassName="active"

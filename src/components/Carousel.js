@@ -78,33 +78,27 @@ const Carousel = ({ slides }) => {
                     alt={slide.alt}
                     fluid={{
                       aspectRatio: 1.75,
-                      srcSet: `${urlFor(slide.image.asset)
+                      srcSet: `${urlFor(slide.image)
                         .width(200)
-                        .fit('crop')
                         .url()} 200w,
-                      ${urlFor(slide.image.asset)
+                      ${urlFor(slide.image)
                         .width(400)
-                        .fit('crop')
                         .url()} 400w,
-                      ${urlFor(slide.image.asset)
+                      ${urlFor(slide.image)
                         .width(800)
-                        .fit('crop')
                         .url()} 800w,
-                      ${urlFor(slide.image.asset)
+                      ${urlFor(slide.image)
                         .width(1200)
-                        .fit('crop')
                         .url()} 1200w,
-                      ${urlFor(slide.image.asset)
+                      ${urlFor(slide.image)
                         .width(1600)
-                        .fit('crop')
                         .url()} 1600w,
-                      ${urlFor(slide.image.asset)
+                      ${urlFor(slide.image)
                         .width(2400)
-                        .fit('crop')
                         .url()} 2400w,
-                      ${urlFor(slide.image.asset).url()} 6000w,`,
+                      ${urlFor(slide.image).url()} 6000w,`,
                       sizes: '(max-width: 800px) 100vw, 800px',
-                      src: urlFor(slide.image.asset).url(),
+                      src: urlFor(slide.image).url(),
                     }}
                   />
                   {slide.caption && <Caption>{slide.caption}</Caption>}

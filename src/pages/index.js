@@ -100,15 +100,6 @@ const IndexPage = () => {
     >
       <SEO title="Home" keywords={[`gatsby`, `react`, `bootstrap`]} />
       <Container>
-        <Row>
-          <Col>
-            <h2>Principal's welcome</h2>
-            <BlockContent
-              blocks={homepageContent._rawPrincipalsWelcome}
-              serializers={serializers}
-            />
-          </Col>
-        </Row>
         {homepageContent._rawAlert.showAlert && (
           <HomepageAlert className="my-4">
             <Col>
@@ -121,6 +112,16 @@ const IndexPage = () => {
             </Col>
           </HomepageAlert>
         )}
+
+        <Row>
+          <Col>
+            <h2>Principal's welcome</h2>
+            <BlockContent
+              blocks={homepageContent._rawPrincipalsWelcome}
+              serializers={serializers}
+            />
+          </Col>
+        </Row>
         {homepageContent._rawSchoolMotto && (
           <Row>
             <Col>
