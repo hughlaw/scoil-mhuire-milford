@@ -5,6 +5,7 @@ import getYouTubeId from 'get-youtube-id';
 import YouTube from 'react-youtube';
 import { ResponsiveEmbed } from 'react-bootstrap';
 import Carousel from './components/Carousel';
+import BlockContent from '@sanity/block-content-to-react';
 
 const builder = imageUrlBuilder({
   projectId: 'i3ln9d71',
@@ -74,6 +75,9 @@ export const serializers = {
       return (
         <>
           {node.title && <h3>{node.title}</h3>}
+          {node.intro && (
+            <BlockContent blocks={node.intro} serializers={serializers} />
+          )}
           <Carousel slides={node.images} />
         </>
       );
