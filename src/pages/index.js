@@ -5,21 +5,10 @@ import Layout from '../components/Layout';
 import SEO from '../components/seo';
 import NewsArticlePreview from '../components/NewsArticlePreview';
 import EventPreview from '../components/EventPreview';
-import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
 import BlockContent from '@sanity/block-content-to-react';
 import { Link } from 'gatsby';
 import { serializers } from '../blockContent';
-
-const AlertHeading = styled.h2`
-  color: white;
-`;
-
-const HomepageAlert = styled(Row)`
-  a {
-    color: yellow;
-  }
-`;
 
 const IndexPage = () => {
   const {
@@ -101,16 +90,14 @@ const IndexPage = () => {
       <SEO title="Home" keywords={[`gatsby`, `react`, `bootstrap`]} />
       <Container>
         {homepageContent._rawAlert.showAlert && (
-          <HomepageAlert className="my-4">
+          <Row className="my-4">
             <Col>
-              <Alert variant="danger">
-                <AlertHeading>
-                  {homepageContent._rawAlert.alertTitle}
-                </AlertHeading>
+              <Alert variant="warning">
+                <h2>{homepageContent._rawAlert.alertTitle}</h2>
                 <BlockContent blocks={homepageContent._rawAlert.alertText} />
               </Alert>
             </Col>
-          </HomepageAlert>
+          </Row>
         )}
 
         <Row>
