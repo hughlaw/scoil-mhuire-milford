@@ -24,7 +24,7 @@ module.exports = {
         short_name: `Scoil Mhuire`,
         start_url: `/`,
         background_color: `#38409a`,
-        theme_color: `#ef4c4a`,
+        theme_color: `#38409a`,
         icon: 'src/images/crest.svg',
         display: `minimal-ui`,
       },
