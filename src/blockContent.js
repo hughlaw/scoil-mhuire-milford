@@ -6,6 +6,7 @@ import YouTube from 'react-youtube';
 import { ResponsiveEmbed } from 'react-bootstrap';
 import Carousel from './components/Carousel';
 import BlockContent from '@sanity/block-content-to-react';
+import { FiDownload } from 'react-icons/fi';
 
 const builder = imageUrlBuilder({
   projectId: 'i3ln9d71',
@@ -80,6 +81,19 @@ export const serializers = {
           )}
           <Carousel slides={node.images} />
         </>
+      );
+    },
+    attachment: ({ node }) => {
+      return (
+        <span className="d-flex my-3">
+          <FiDownload />
+          <a
+            className="h6 ml-2 mb-0"
+            href={`${node.attachmentDocument.asset.url}?dl=`}
+          >
+            {node.name}
+          </a>
+        </span>
       );
     },
   },
