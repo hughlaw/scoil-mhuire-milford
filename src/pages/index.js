@@ -26,7 +26,7 @@ const IndexPage = () => {
           }
         }
         _rawPrincipalsWelcome
-        _rawAlert
+        _rawAlert(resolveReferences: { maxDepth: 10 })
         _rawSchoolMotto
       }
 
