@@ -94,7 +94,10 @@ const IndexPage = () => {
             <Col>
               <Alert variant="warning">
                 <h2>{homepageContent._rawAlert.alertTitle}</h2>
-                <BlockContent blocks={homepageContent._rawAlert.alertText} />
+                <BlockContent
+                  blocks={homepageContent._rawAlert.alertText}
+                  serializers={serializers}
+                />
               </Alert>
             </Col>
           </Row>
