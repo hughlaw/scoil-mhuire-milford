@@ -39,6 +39,7 @@ const IndexPage = () => {
             slug {
               current
             }
+            _rawImage
             image {
               image {
                 asset {
@@ -135,7 +136,7 @@ const IndexPage = () => {
                       title={article.title}
                       excerpt={article.excerpt}
                       date={article.date}
-                      image={article.image?.image}
+                      image={article._rawImage}
                       slug={article.slug.current}
                     />
                   </Col>

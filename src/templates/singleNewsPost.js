@@ -16,7 +16,7 @@ const builder = imageUrlBuilder({
 });
 
 const urlFor = source => {
-  return builder.image(source);
+  return builder.image(source._type === 'smImage' ? source.image : source);
 };
 
 export default function singlePost({ data }) {
@@ -56,9 +56,13 @@ export default function singlePost({ data }) {
         </Col>
       </Row>
       {post.node.image && (
-        <Image
-          fluid={post.node.image.image.asset.fluid}
-          className="mb-4 rounded"
+        <img
+          alt={`${post.node._rawImage.alt}`}
+          className="mb-4 rounded w-100"
+          src={urlFor(post.node._rawImage)
+            .height(350)
+            .width(800)
+            .url()}
         />
       )}
       <BlockContent
@@ -80,10 +84,11 @@ export const pageQuery = graphql`
           }
           date
           title
+          _rawImage
           image {
             image {
               asset {
-                fluid {
+                fluid(maxHeight: 350) {
                   ...GatsbySanityImageFluid
                 }
               }

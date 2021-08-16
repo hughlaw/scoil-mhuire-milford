@@ -27,7 +27,7 @@ export default function allPosts({ pageContext, data }) {
         {posts.map(post => (
           <Col className="mb-4" key={post.node.slug.current}>
             <NewsArticlePreview
-              image={post.node.image?.image}
+              image={post.node._rawImage}
               title={post.node.title}
               excerpt={post.node.excerpt}
               date={post.node.date}
@@ -79,6 +79,7 @@ export const pageQuery = graphql`
           title
           excerpt
           date
+          _rawImage
           image {
             image {
               asset {

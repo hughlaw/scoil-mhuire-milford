@@ -16,20 +16,24 @@ const PoliciesPage = () => {
   const { sanityPoliciesPage: policyPage } = useStaticQuery(graphql`
     {
       sanityPoliciesPage {
-        _rawIntroduction
-        policies {
-          name
-          description
-          policyDocument {
-            asset {
-              originalFilename
-              url
-              size
-              title
-              description
+        policySection {
+          title
+          _rawIntroduction
+          policies {
+            name
+            description
+            policyDocument {
+              asset {
+                originalFilename
+                url
+                size
+                title
+                description
+              }
             }
           }
         }
+        _rawIntroduction
       }
     }
   `);
@@ -50,25 +54,37 @@ const PoliciesPage = () => {
 
         <Row className="mt-4 mb-4">
           <Col>
-            {policyPage.policies.map((policy, i, arr) => (
-              <Row className="mb-4" key={`policy-${i}`}>
-                <Col className="d-sm-flex justify-content-between align-items-center mb-3">
-                  <h2 className="mb-0">{policy.name}</h2>
-                  {policy.policyDocument && (
-                    <a
-                      className="btn btn-secondary"
-                      href={`${policy.policyDocument.asset.url}?dl=`}
-                    >
-                      <FiDownload /> Download
-                      <span className="sr-only"> {policy.name} document</span> (
-                      {Math.ceil(policy.policyDocument.asset.size / 1024)}kB)
-                    </a>
-                  )}
+            {policyPage.policySection.map((policySection, i, arr) => (
+              <Row className="mb-4" key={`policy-section-${i}`} >
+                <Col>
+                  <h2 className="mb-2">{policySection.title}</h2>
+                  <BlockContent
+                    className="mb-4"
+                    blocks={policySection._rawIntroduction}
+                    serializers={serializers}
+                  />
+                  {policySection.policies.map((policy, i, arr) => (
+                    <Row className="mb-3" key={`policy-${i}`}>
+                      <Col className="d-sm-flex justify-content-between align-items-center mb-3">
+                        <h3 className=" h4 mb-0">{policy.name}</h3>
+                        {policy.policyDocument && (
+                          <a
+                            className="btn btn-secondary"
+                            href={`${policy.policyDocument.asset.url}?dl=`}
+                          >
+                            <FiDownload /> Download
+                            <span className="sr-only"> {policy.name} document</span> (
+                            {Math.ceil(policy.policyDocument.asset.size / 1024)}kB)
+                          </a>
+                        )}
+                      </Col>
+                      <Col xs={12}>
+                        <p>{policy.description}</p>
+                      </Col>
+                      {arr.length !== i + 1 && <Hr />}
+                    </Row>
+                  ))}
                 </Col>
-                <Col xs={12}>
-                  <p>{policy.description}</p>
-                </Col>
-                {arr.length !== i + 1 && <Hr />}
               </Row>
             ))}
           </Col>
