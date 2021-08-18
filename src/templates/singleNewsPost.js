@@ -2,7 +2,6 @@ import React from 'react';
 import BlockContent from '@sanity/block-content-to-react';
 import Layout from '../components/Layout';
 import SEO from '../components/seo';
-import Image from 'gatsby-image';
 import { Button, Row, Col } from 'react-bootstrap';
 import { FiChevronLeft } from 'react-icons/fi';
 import imageUrlBuilder from '@sanity/image-url';

@@ -54,10 +54,11 @@ const PoliciesPage = () => {
   const { sanityPoliciesPage: policyPage } = useStaticQuery(graphql`
     {
       sanityPoliciesPage {
+        _rawIntroduction
+        _rawPolicySection
         policySection {
+          _key
           title
-          _rawIntroduction
-          _rawPolicies
           policies {
             _key
             name
@@ -70,7 +71,6 @@ const PoliciesPage = () => {
             }
           }
         }
-        _rawIntroduction
       }
     }
   `)
@@ -91,42 +91,17 @@ const PoliciesPage = () => {
 
         <Row className="mt-4 mb-4">
           <Col>
-            {policyPage.policySection.map((policySection, i, arr) => (
+            {policyPage._rawPolicySection.map((policySection, i) => (
               <Row className="mb-4" key={`policy-section-${i}`} >
                 <Col>
                   <h2 className="mb-2">{policySection.title}</h2>
                   <BlockContent
                     className="mb-4"
-                    blocks={policySection._rawIntroduction}
+                    blocks={policySection.introduction}
                     serializers={serializers}
                   />
-                  {policySection._rawPolicies.map((policy, i, arr) => (
-                    <Policy i={i} policy={policy} policies={policySection.policies} last={arr.length === i+1}/>
-                    // <Row className="mb-3" key={`policy-${i}`}>
-                    //   <Col className="d-sm-flex justify-content-between align-items-center mb-3">
-                    //     <Button variant="link" className="p-0">
-                    //       <h3 className="h4 mb-0">{policy.name}</h3>
-                    //     </Button>
-                    //     {policy.policyDocument && (
-                    //       <a
-                    //         className="btn btn-secondary"
-                    //         href={`${policySection.policies.find(p => p._key === policy._key)?.policyDocument.asset?.url}?dl=`}
-                    //       >
-                    //         <FiDownload /> Download
-                    //         <span className="sr-only"> {policy.name} document</span> (
-                    //         {Math.ceil(policySection.policies.find(p => p._key === policy._key)?.policyDocument.asset?.size / 1024)}kB)
-                    //       </a>
-                    //     )}
-                    //   </Col>
-                    //   <Col xs={12}>
-                    //   <BlockContent
-                    //     className="mb-4"
-                    //     blocks={policy.description}
-                    //     serializers={serializers}
-                    //   />
-                    //   </Col>
-                    //   {arr.length !== i + 1 && <Hr />}
-                    // </Row>
+                  {policySection.policies.map((policy, i, arr) => (
+                    <Policy i={i} policy={policy} policies={policyPage.policySection.find(pS => pS._key === policySection._key)?.policies} last={arr.length === i+1}/>
                   ))}
                 </Col>
               </Row>

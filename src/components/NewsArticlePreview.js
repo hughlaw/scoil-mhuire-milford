@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
-import Img from 'gatsby-image';
 import { Link } from 'gatsby';
 import moment from 'moment';
 import imageUrlBuilder from '@sanity/image-url';
