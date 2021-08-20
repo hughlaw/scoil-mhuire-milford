@@ -87,6 +87,14 @@ const CustomNavbar = ({ pageInfo }) => {
                 {page.title}
               </Link>
             ))}
+            <Link
+              to="/policies"
+              activeClassName="active"
+              partiallyActive={true}
+              className="link-no-style pl-lg-4 pb-3 pb-lg-0"
+            >
+              Policies
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

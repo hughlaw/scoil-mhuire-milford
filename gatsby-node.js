@@ -21,6 +21,16 @@ exports.createPages = async function({ graphql, actions }) {
           }
         }
       }
+      allSanityPoliciesPage {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+          }
+        }
+      }
       allSanityNewsArticle(limit: 50, sort: { order: DESC, fields: date }) {
         edges {
           node {
@@ -69,6 +79,17 @@ exports.createPages = async function({ graphql, actions }) {
     actions.createPage({
       path: `/classes/${slug}`,
       component: require.resolve('./src/templates/classPage.js'),
+      context: { id },
+    });
+  });
+
+  // Create single pages
+  data.allSanityPoliciesPage.edges.forEach(edge => {
+    const slug = edge.node.slug.current;
+    const id = edge.node.id;
+    actions.createPage({
+      path: `/policies/${slug}`,
+      component: require.resolve('./src/templates/policyPage.js'),
       context: { id },
     });
   });
