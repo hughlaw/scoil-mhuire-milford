@@ -33,17 +33,19 @@ export default function singlePost({ data }) {
         Back
       </Button>
       <h1 className="text-center">{classPage.node.title}</h1>
-      <div className="text-center">
-        <img
-          alt={`${classPage.node.teacher.name}`}
-          className="profile-pic mb-2"
-          src={urlFor(classPage.node.teacher._rawProfilePic)
-            .width(150)
-            .height(150)
-            .url()}
-        />
-        <p className="text-muted">{classPage.node.teacher.name}</p>
-      </div>
+      {classPage.node.teacher && (
+        <div className="text-center">
+          <img
+            alt={`${classPage.node.teacher.name}`}
+            className="profile-pic mb-2"
+            src={urlFor(classPage.node.teacher._rawProfilePic)
+              .width(150)
+              .height(150)
+              .url()}
+          />
+          <p className="text-muted">{classPage.node.teacher.name}</p>
+        </div>
+      )}
       <BlockContent
         blocks={classPage.node._rawPageContent}
         serializers={serializers}
