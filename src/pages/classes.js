@@ -19,7 +19,7 @@ const urlFor = source => {
 const ClassesPage = () => {
   const { allSanityClassPage: classPages } = useStaticQuery(graphql`
     {
-      allSanityClassPage(sort: { order: ASC, fields: sortOrder }) {
+      allSanityClassPage(sort: { order: ASC, fields: sortOrder }, filter: {archived: {ne: true}}) {
         edges {
           node {
             title
@@ -55,6 +55,7 @@ const ClassesPage = () => {
                     to={`/classes/${classPage.node.slug.current}`}
                     className="d-flex flex-column align-items-center justify-content-between"
                   >
+                    {classPage.node.teacher && (
                     <img
                       alt={`${classPage.node.teacher.name}`}
                       className="profile-pic"
@@ -63,8 +64,11 @@ const ClassesPage = () => {
                         .height(150)
                         .url()}
                     />
+                    )}
                     <h2 className="mb-0">{classPage.node.title}</h2>
-                    <p className="text-muted">{classPage.node.teacher.name}</p>
+                    {classPage.node.teacher && (
+                      <p className="text-muted">{classPage.node.teacher.name}</p>
+                    )}
                   </Link>
                 </Card.Body>
               </Card>
