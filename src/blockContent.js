@@ -4,7 +4,7 @@ import imageUrlBuilder from '@sanity/image-url';
 import getYouTubeId from 'get-youtube-id';
 import YouTube from 'react-youtube';
 import { ResponsiveEmbed } from 'react-bootstrap';
-import Carousel from './components/Carousel';
+import GridGallery from './components/GridGallery';
 import BlockContent from '@sanity/block-content-to-react';
 import { FiDownload } from 'react-icons/fi';
 
@@ -79,7 +79,7 @@ export const serializers = {
           {node.intro && (
             <BlockContent blocks={node.intro} serializers={serializers} />
           )}
-          <Carousel slides={node.images} />
+          <GridGallery slides={node.images} />
         </>
       );
     },
