@@ -1,9 +1,5 @@
-# Gatsby React Bootstrap Starter
+# Schoil Mhuire Milford Website (frontend)
 
-A GatsbyJS starter that includes
+The site frontend is hosted and automatically built using Netlify and a webhook provided by the Sanity backend
 
-- react-bootstrap
-- react-icons
-- sticky on scroll navbar
-- SASS compiler
-- basic layout
+The Sanity Studio interface can be found at https://scoilmhuire.sanity.studio/ to manage content - the site automatically rebuilds upon content changes.
