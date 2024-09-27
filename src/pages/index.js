@@ -11,11 +11,7 @@ import { Link } from 'gatsby';
 import { serializers } from '../blockContent';
 
 const IndexPage = () => {
-  const {
-    sanityHomepageContent: homepageContent,
-    allSanityNewsArticle: newsArticles,
-    allSanityEvent: events,
-  } = useStaticQuery(graphql`
+  const { sanityHomepageContent: homepageContent } = useStaticQuery(graphql`
     {
       sanityHomepageContent {
         splashImage {
@@ -29,59 +25,8 @@ const IndexPage = () => {
         _rawAlert(resolveReferences: { maxDepth: 10 })
         _rawSchoolMotto
       }
-
-      allSanityNewsArticle(limit: 3, sort: { order: DESC, fields: date }) {
-        edges {
-          node {
-            id
-            title
-            excerpt
-            slug {
-              current
-            }
-            _rawImage
-            image {
-              image {
-                asset {
-                  fluid(maxHeight: 500) {
-                    ...GatsbySanityImageFluid
-                  }
-                }
-              }
-            }
-            date
-          }
-        }
-      }
-
-      allSanityEvent(limit: 3, sort: { order: DESC, fields: startDate }) {
-        edges {
-          node {
-            id
-            title
-            excerpt
-            slug {
-              current
-            }
-            image {
-              image {
-                asset {
-                  fluid(maxHeight: 500) {
-                    ...GatsbySanityImageFluid
-                  }
-                }
-              }
-            }
-            startDate
-            endDate
-            showTimes
-          }
-        }
-      }
     }
   `);
-
-  const hasEvents = events.edges.length > 0;
 
   return (
     <Layout
@@ -121,62 +66,6 @@ const IndexPage = () => {
                 blocks={homepageContent._rawSchoolMotto}
                 serializers={serializers}
               />
-            </Col>
-          </Row>
-        )}
-
-        <Row className="mt-4 mb-4">
-          <Col>
-            <h2>News & Announcements</h2>
-            <Row className="row-cols-1 row-cols-md-2 row-cols-lg-3">
-              {newsArticles.edges.map(({ node: article }, i) => {
-                return (
-                  <Col className="mb-4" key={article.slug.current}>
-                    <NewsArticlePreview
-                      title={article.title}
-                      excerpt={article.excerpt}
-                      date={article.date}
-                      image={article._rawImage}
-                      slug={article.slug.current}
-                    />
-                  </Col>
-                );
-              })}
-            </Row>
-            <Row>
-              <Link to="news" className="ml-auto">
-                See more announcements <FiChevronRight />
-              </Link>
-            </Row>
-          </Col>
-        </Row>
-
-        {hasEvents && (
-          <Row className="mt-4 mb-4">
-            <Col>
-              <h2>Upcoming events</h2>
-              <Row className="row-cols-1 row-cols-md-2 row-cols-lg-3">
-                {events.edges.map(({ node: event }, i) => {
-                  return (
-                    <Col className="mb-4" key={event.slug.current}>
-                      <EventPreview
-                        title={event.title}
-                        excerpt={event.excerpt}
-                        startDate={event.startDate}
-                        endDate={event.endDate}
-                        showTimes={event.showTimes}
-                        image={event.image?.image}
-                        slug={event.slug.current}
-                      />
-                    </Col>
-                  );
-                })}
-              </Row>
-              <Row>
-                <Link to="events" className="ml-auto">
-                  See all events <FiChevronRight />
-                </Link>
-              </Row>
             </Col>
           </Row>
         )}

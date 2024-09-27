@@ -54,13 +54,13 @@ const CustomNavbar = ({ pageInfo }) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto" activeKey={pageInfo && pageInfo.pageName}>
-            <Link
+            {/* <Link
               to="/news"
               activeClassName="active"
               className="link-no-style pl-lg-4 pb-3 pb-lg-0"
             >
               News
-            </Link>
+            </Link> */}
             {/* <Link
               to="/events"
               activeClassName="active"
