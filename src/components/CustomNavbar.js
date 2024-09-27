@@ -69,14 +69,14 @@ const CustomNavbar = ({ pageInfo }) => {
             >
               Events
             </Link> */}
-            <Link
+            {/* <Link
               to="/classes"
               activeClassName="active"
               partiallyActive={true}
               className="link-no-style pl-lg-4 pb-3 pb-lg-0"
             >
               Classes
-            </Link>
+            </Link> */}
             {settings.navigation.map(page => (
               <Link
                 key={page.slug.current}
