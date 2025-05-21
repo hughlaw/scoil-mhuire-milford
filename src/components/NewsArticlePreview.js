@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap';
 import { Link } from 'gatsby';
 import moment from 'moment';
 import imageUrlBuilder from '@sanity/image-url';
+import newsPlaceholder from '../images/news-placeholder.jpg';
 
 const builder = imageUrlBuilder({
   projectId: 'i3ln9d71',
@@ -26,9 +27,7 @@ export default function NewsArticle({ image, title, excerpt, date, slug }) {
               .url()}
           />
         )}
-        {!image && (
-          <Card.Img variant="top" src="/images/news-placeholder.jpg" />
-        )}
+        {!image && <Card.Img variant="top" src={newsPlaceholder} />}
         <Card.Body>
           <Card.Title as="h1" className="h4">
             {title}
