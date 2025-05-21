@@ -5,6 +5,8 @@ import { FaFacebook, FaTwitter } from 'react-icons/fa';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Link } from 'gatsby';
 import greenschoolslogo from '../images/greenschools.png';
+import activeSchoolsLogo from '../images/active-schools.png';
+import amberLogo from '../images/amber.png';
 
 const Footer = () => {
   const { sanitySiteSettings: settings } = useStaticQuery(graphql`
@@ -138,19 +140,54 @@ const Footer = () => {
               >
                 Aladdin Login
               </a>
-              <a
-                href="https://greenschoolsireland.org/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img
-                  src={greenschoolslogo}
-                  className="my-4"
-                  alt=""
-                  width="120"
-                  height="120"
-                />
-              </a>
+
+              <div className="d-flex flex-row-reverse justify-content-start align-items-center">
+                <a
+                  href="https://greenschoolsireland.org/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="ml-4"
+                >
+                  <span className="sr-only">
+                    Green Schools initiative (external link)
+                  </span>
+                  <img
+                    src={greenschoolslogo}
+                    className="my-4"
+                    alt=""
+                    width="120"
+                    height="120"
+                  />
+                </a>
+                <a
+                  href="https://activeschoolflag.ie/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="sr-only">
+                    Active Schools Programme (external link)
+                  </span>
+                  <img
+                    src={activeSchoolsLogo}
+                    className="my-4"
+                    alt=""
+                    width="120"
+                    height="120"
+                  />
+                </a>
+              </div>
+              <div className="d-flex justify-content-end align-items-center">
+                <a
+                  href="https://www.pieta.ie/how-we-can-help/education-training/amber-flag-initiative/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="sr-only">
+                    Amber Flag Initiative (external link)
+                  </span>
+                  <img src={amberLogo} alt="" width="256" height="98" />
+                </a>
+              </div>
             </Col>
           </Row>
           <Row>

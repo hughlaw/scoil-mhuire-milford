@@ -17,7 +17,18 @@ export default function NewsArticle({ image, title, excerpt, date, slug }) {
   return (
     <Card as="article">
       <Link to={`/news/${slug}`}>
-        {image && <Card.Img variant="top" src={urlFor(image).height(150).width(200).url()} />}
+        {image && (
+          <Card.Img
+            variant="top"
+            src={urlFor(image)
+              .height(150)
+              .width(200)
+              .url()}
+          />
+        )}
+        {!image && (
+          <Card.Img variant="top" src="/images/news-placeholder.jpg" />
+        )}
         <Card.Body>
           <Card.Title as="h1" className="h4">
             {title}
