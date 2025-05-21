@@ -68,7 +68,7 @@ export const pageQuery = graphql`
             name
             _rawProfilePic
           }
-          _rawPageContent
+          _rawPageContent(resolveReferences: { maxDepth: 5 })
         }
       }
     }
