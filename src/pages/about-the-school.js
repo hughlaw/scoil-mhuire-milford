@@ -24,7 +24,7 @@ const AboutTheSchoolPage = () => {
     {
       sanityAboutPage {
         staffIntro
-        _rawPageContent(resolveReferences: { maxDepth: 5 })
+        _rawPagecontent(resolveReferences: { maxDepth: 5 })
       }
       sanityStaffDirectory {
         staffMembers {
