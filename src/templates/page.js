@@ -29,7 +29,7 @@ export const pageQuery = graphql`
             current
           }
           title
-          _rawPageContent(resolveReferences: { maxDepth: 3 })
+          _rawPageContent(resolveReferences: { maxDepth: 5 })
         }
       }
     }
